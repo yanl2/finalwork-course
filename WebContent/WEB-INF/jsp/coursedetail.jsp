@@ -18,6 +18,9 @@
 				line-height: 27.5px;
 				text-align: center;
 			}
+			td:hover{
+				background:rgba(101, 194, 58, 0.4);
+			}
 			html,
 			body {
 				padding: 5px;
@@ -81,6 +84,9 @@
 			.btn4:active{
 				background: rgb(245, 108, 108, 1)/* #F56C6C */
 			}
+			.red{
+				background:red;
+			}
 		</style>
     </head>
     <body>
@@ -88,7 +94,7 @@
     		<div style="display:flex;">
 	    		<div class="btn" onclick="funImport()">导入课程</div>
 				<input id="import" style="height:40px;display:none;" type="file"onchange="importf(this)" />  
-	    		<div class="btn btn1" onclick="">调换课程</div>
+	    		<div class="btn btn1" onclick="gotochangecourse()">调换课程</div>
 				<div class="btn btn4" onclick="funallclear()">清空课表</div>
 				<div class="btn btn2" onclick="funBack()">返回主页</div>
     		</div>
@@ -175,6 +181,7 @@
             var wb;//读取完成的数据
             var rABS = false; //是否将文件读取为二进制字符串
 			var room = decodeURI(getQueryVariable('room'));
+            var courseforc = {};
             document.getElementById("roomid").innerText = "理4-"+room;
             var jsonlist = [];
             <% 
@@ -188,6 +195,22 @@
 			document.getElementById("currentweek").innerText = week[dijizhou];
 			settabledata(jsonlist);
 			
+			$(function(){
+				$("td").click(function(e){
+					if(e.target.innerHTML != ""){
+						$(this).css('background-color','rgba(101, 194, 58)');
+						$('td').not(this).css('background-color','');
+						var cellIndex = e.target.cellIndex;
+						var rowIndex = e.target.parentElement.rowIndex;
+						for(var i=0;i<jsonlist.length;i++){
+							if(jsonlist[i].location === rowIndex+","+cellIndex){
+								courseforc = jsonlist[i];
+								break;
+							}
+						}
+					}
+				})
+			})
             function getQueryVariable(variable)
             {
                    var query = window.location.search.substring(1);
@@ -392,6 +415,13 @@
             }
             function funBack(){
             	window.location.href="/course/home";
+            }
+            function gotochangecourse(){
+            	if("courseName" in courseforc){
+            		window.location.href="/course/gotochangecourse?course="+encodeURI(JSON.stringify(courseforc))+"&dijizhou="+dijizhou+"&room="+room;
+            	}else{
+            		alert("您还没选择要调换的课程哦!");
+            	}
             }
         </script>
     </body>

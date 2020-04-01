@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>添加课程</title>
+<title>调换课程</title>
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
 <style type="text/css">
 html,body{
@@ -178,49 +178,47 @@ display:block;
 </head>
 <body>
 <div class="btn btn2" style="position:absolute;top:10px;" onclick="funBack()">返 回</div>
-<div class="line" style="margin-top:30px;">
+<div class="line" style="margin-top:10px;">
 	<div class="line-item">
 		<div class="line-item-label">课程名称</div>
-		<input id="resultcoursename" placeholder="请输入课程名称" \>
+		<input id="resultcoursename" placeholder="请输入课程名称" readonly value=""\>
 	</div>
 	<div class="line-item">
 		<div class="line-item-label">授课教师</div>
-		<input id="resultteacher" placeholder="请输入授课教师" \>
+		<input id="resultteacher" placeholder="请输入授课教师" readonly value=""\>
 	</div>
 	<div class="line-item">
 		<div class="line-item-label">上课学生</div>
-		<input id="resultstudent" placeholder="请输入上课学生" \>
+		<input id="resultstudent" placeholder="请输入上课学生" readonly value="" \>
 	</div>
 </div>
-<div class="line" style="margin-top:90px;">
+<div class="line" style="margin-top:60px;">
 	<div class="line-item">
 		<div class="line-item-label">周数</div>
-		<input id="resultzs" style="cursor:pointer;" placeholder="请选择周数" readonly value="" onclick="funshowzs()"\>
+		<input id="resultzs" placeholder="请选择周数" readonly value=""\>
 	</div>
 	<div class="line-item">
 		<div class="line-item-label">机房</div>
-		<input id="resultjf" style="cursor:pointer;" placeholder="请选择机房" readonly value="" onclick="funshowjf()"\>
+		<input id="resultjfold" placeholder="请选择机房" readonly value=""\>
 	</div>
 	<div class="line-item">
 		<div class="line-item-label">节次</div>
+		<input id="resultjcold" placeholder="请选择节次" readonly value=""\>
+	</div>
+</div>
+<div class="line" style="margin-top:110px;">
+	<div class="line-item">
+		<div class="line-item-label">新机房</div>
+		<input id="resultjf" style="cursor:pointer;" placeholder="请选择机房" readonly value="" onclick="funshowjf()"\>
+	</div>
+	<div class="line-item">
+		<div class="line-item-label">新节次</div>
 		<input id="resultjc" style="cursor:pointer;" placeholder="请选择节次" readonly value="" onclick="funshowjc()"\>
 	</div>
+	<div class="line-item"></div>
 </div>
 <div class="btn btn1 btnqr" onclick="funaddcourse()">确认添加</div>
 <div class="zstitle"></div>
-<div class="zhoushu">
-	<div class="zsitem" onclick="zsclick(event)">1</div><div class="zsitem" onclick="zsclick(event)">2</div>
-	<div class="zsitem" onclick="zsclick(event)">3</div><div class="zsitem" onclick="zsclick(event)">4</div>
-	<div class="zsitem" onclick="zsclick(event)">5</div><div class="zsitem" onclick="zsclick(event)">6</div>
-	<div class="zsitem" onclick="zsclick(event)">7</div><div class="zsitem" onclick="zsclick(event)">8</div>
-	<div class="zsitem" onclick="zsclick(event)">9</div><div class="zsitem" onclick="zsclick(event)">10</div>
-	<div class="zsitem" onclick="zsclick(event)">11</div><div class="zsitem" onclick="zsclick(event)">12</div>
-	<div class="zsitem" onclick="zsclick(event)">13</div><div class="zsitem" onclick="zsclick(event)">14</div>
-	<div class="zsitem" onclick="zsclick(event)">15</div><div class="zsitem" onclick="zsclick(event)">16</div>
-	<div class="zsitem" onclick="zsclick(event)">17</div><div class="zsitem" onclick="zsclick(event)">18</div>
-	<div class="zsitem" onclick="zsclick(event)">19</div><div class="zsitem" onclick="zsclick(event)">20</div>
-	<div class="zsitem1" onclick="zsclick1(event)">无</div><div class="zsitem1" onclick="zsclick1(event)">单</div><div class="zsitem1" onclick="zsclick1(event)">双</div>
-</div>
 <div class="jieci">
 	<div class="jieciitem" data-num="1" onclick="jcclick(event,1)">1,2节</div><div class="jieciitem" data-num="2" onclick="jcclick(event,2)">3节</div>
 	<div class="jieciitem" data-num="2" onclick="jcclick(event,2)">3,4节</div><div class="jieciitem" data-num="2" onclick="jcclick(event,2)">3,4,5节</div>
@@ -230,12 +228,13 @@ display:block;
 </div>
 <div class="jifang">
 	<% List<BeanRoom> rooms = (List<BeanRoom>)request.getAttribute("rooms"); %>
-	<select onchange="funchangeroom()">
+	<%-- <select onchange="funchangeroom()">
 		<% for(BeanRoom r:rooms){ %>
 		<option><%=r.getRoom() %></option>
 		<%} %>
 	</select>
-	<table border="1" style="border-collapse: collapse;width: 100%;margin-top:5px;">
+ --%>	
+ <table border="1" style="border-collapse: collapse;width: 100%;margin-top:5px;">
 		<thead style="width: 100%;">
 			<tr style="height: 40px;">
 				<th style="width: 50px;">节次</th>
@@ -304,16 +303,40 @@ display:block;
 </div>
 
 <script type="text/javascript">
-var flag = 0,beginzs = 0,endzs = 0,num = 0,loc = "";
-var jsonlist = [];
-<% 
-	List<BeanCourse> courselist =(List<BeanCourse>) request.getAttribute("courses"); 
-	for(BeanCourse course:courselist) { 
-%>
-var course = <%=course.toJSON()%>;
-jsonlist.push(course);
-<%} %>
 var dijizhou = getQueryVariable("dijizhou");
+var room = getQueryVariable("room");
+initPage();
+
+function initPage(){
+	var courseforc =  getQueryVariable("course");
+	courseforc = JSON.parse(decodeURI(courseforc));
+	$("#resultcoursename")[0].value = courseforc.courseName;
+	$("#resultteacher")[0].value = courseforc.teacher;
+	$("#resultstudent")[0].value = courseforc.student;
+	var weeks = courseforc.weeks.split(",");
+	var j = 1;
+	var min = weeks.length-1;
+	var max = 1;
+	var ext = "";
+	for(j; j < weeks.length; j++) {
+		if(weeks[j] == 1 && j > max) {
+			max = j;
+		}
+		if(weeks[j] == 1 && j < min) {
+			min = j;
+		}
+	}
+	for(j = min; j <= max; j++) {
+		if(weeks[j] != 1) {
+			ext = j % 2 === 0 ? '单' : '双';
+			break;
+		}
+	}
+	$("#resultzs")[0].value = min + '-' + max + ext;
+	$("#resultjfold")[0].value = courseforc.room;
+	$("#resultjcold")[0].value = courseforc.sectionName;
+}
+
 function getQueryVariable(variable)
 {
        var query = window.location.search.substring(1);
@@ -483,7 +506,7 @@ function funchangeroom(){
     }); 
 }
 function funBack(){
-	window.location.href="/course/home";
+	window.location.href="/course/coursedetail?room="+room+"&dijizhou="+dijizhou;
 }
 function funaddcourse(){
 	var weeks = $("#resultzs")[0].value;
