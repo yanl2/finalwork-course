@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="refresh" content="5;url=home"> 
+<title>Welcome</title>
+<style type="text/css">
+html,body{
+width:100%;
+height:100%;
+margin:0;
+padding:0;
+}
+.divForm{
+position: absolute;/*绝对定位*/
+width: 300px;
+height: 240px;
+
+text-align: center;/*(让div中的内容居中)*/
+top: 50%;
+left: 50%;
+margin-top: -110px;
+margin-left: -150px;
+}
+</style>
+</head>
+<body onload="run()" style="background-image: url(img/background.jpg);background-repeat: repeat-y;background-size: 100% auto;">
+
+<div class="divForm">
+   <div><strong>欢迎进入实验中心课表展示系统!</strong></div>
+</div>
+	
+	
+</body>
+<br><script type="text/javascript">
+    var x = 5;
+    function run(){
+        var span = document.getElementById("spanId");
+        //span.innerHTML = x;
+        x--;
+        window.setTimeout("run()", 1000);
+    }
+     
+</script>
+
+</html>
