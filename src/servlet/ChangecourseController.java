@@ -39,17 +39,17 @@ public class ChangecourseController {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 		ApplicationContext applicationContext=new ClassPathXmlApplicationContext("application.xml");
-//		courseService=(CourseService) applicationContext.getBean("courseService");
-//		roomService=(RoomService) applicationContext.getBean("roomService");
-//		List<BeanRoom> rooms = new ArrayList<BeanRoom>();
-//		rooms = roomService.loadRooms();
-//		request.setAttribute("rooms", rooms);
-//		List<BeanCourse> courses = new ArrayList<BeanCourse>();
-//		for(BeanRoom r:rooms) {
-//			courses = courseService.loadCourseList(r.getRoom());
-//			break;
-//		}
-//		request.setAttribute("courses", courses);
+		courseService=(CourseService) applicationContext.getBean("courseService");
+		roomService=(RoomService) applicationContext.getBean("roomService");
+		List<BeanRoom> rooms = new ArrayList<BeanRoom>();
+		rooms = roomService.loadRooms();
+		request.setAttribute("rooms", rooms);
+		List<BeanCourse> courses = new ArrayList<BeanCourse>();
+		for(BeanRoom r:rooms) {
+			courses = courseService.loadCourseList(r.getRoom());
+			break;
+		}
+		request.setAttribute("courses", courses);
 		request.getRequestDispatcher("/WEB-INF/jsp/changecourse.jsp").forward(request, response);
 	}
     
@@ -71,16 +71,16 @@ public class ChangecourseController {
 //		return jsonArray;
 //	}
 //    
-//    @RequestMapping(value="/addonecourse")
-//	@ResponseBody
-//	public String addRoom(@RequestBody BeanCourse course,HttpServletRequest request, HttpServletResponse response)
-//			throws ServletException, IOException{
-//		response.setContentType("application/json");
-//		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("application.xml");
-//    	courseService=(CourseService) applicationContext.getBean("courseService");
-//    	courseService.addCourse(course);
-//		return "1";
-//	}
+    @RequestMapping(value="/updatecourse")
+	@ResponseBody
+	public String addRoom(@RequestBody List<BeanCourse> courses,HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException{
+		response.setContentType("application/json");
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("application.xml");
+    	courseService=(CourseService) applicationContext.getBean("courseService");
+    	courseService.updataCourse(courses.get(0), courses.get(1));
+		return "1";
+	}
 	
 	
 }

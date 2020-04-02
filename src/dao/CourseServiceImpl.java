@@ -33,5 +33,10 @@ public class CourseServiceImpl implements CourseService {
 	public void deleteAllCourses(String room) {
 		courseDao.deleteCourse(room);
 	}
+	
+	@Override
+	public void updataCourse(BeanCourse newcourse,BeanCourse oldcourse) {
+		courseDao.changeCourse(newcourse, oldcourse);
+	}
 
 }

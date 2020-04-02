@@ -52,6 +52,11 @@ public class CourseDao {
 		this.jdbcTemplate.update(sql,room);
 	}
 	
+	public void changeCourse(BeanCourse course,BeanCourse oldcourse) {
+		String sql="update course set room=?,sectionname=?,location=? where (room=? and location=?)";
+		this.jdbcTemplate.update(sql,course.getRoom(),course.getSectionName(),course.getLocation(),oldcourse.getRoom(),oldcourse.getLocation());
+	}
+	
 	
 	
 	

@@ -194,16 +194,16 @@ display:block;
 </div>
 <div class="line" style="margin-top:60px;">
 	<div class="line-item">
-		<div class="line-item-label">周数</div>
-		<input id="resultzs" placeholder="请选择周数" readonly value=""\>
-	</div>
-	<div class="line-item">
 		<div class="line-item-label">机房</div>
 		<input id="resultjfold" placeholder="请选择机房" readonly value=""\>
 	</div>
 	<div class="line-item">
 		<div class="line-item-label">节次</div>
 		<input id="resultjcold" placeholder="请选择节次" readonly value=""\>
+	</div>
+	<div class="line-item">
+		<div class="line-item-label">周数</div>
+		<input id="resultzs" placeholder="请选择周数" readonly value=""\>
 	</div>
 </div>
 <div class="line" style="margin-top:110px;">
@@ -217,7 +217,7 @@ display:block;
 	</div>
 	<div class="line-item"></div>
 </div>
-<div class="btn btn1 btnqr" onclick="funaddcourse()">确认添加</div>
+<div class="btn btn1 btnqr" onclick="funchangecourse()">确认调换</div>
 <div class="zstitle"></div>
 <div class="jieci">
 	<div class="jieciitem" data-num="1" onclick="jcclick(event,1)">1,2节</div><div class="jieciitem" data-num="2" onclick="jcclick(event,2)">3节</div>
@@ -228,12 +228,11 @@ display:block;
 </div>
 <div class="jifang">
 	<% List<BeanRoom> rooms = (List<BeanRoom>)request.getAttribute("rooms"); %>
-	<%-- <select onchange="funchangeroom()">
+	<select onchange="funchangeroom()">
 		<% for(BeanRoom r:rooms){ %>
 		<option><%=r.getRoom() %></option>
 		<%} %>
 	</select>
- --%>	
  <table border="1" style="border-collapse: collapse;width: 100%;margin-top:5px;">
 		<thead style="width: 100%;">
 			<tr style="height: 40px;">
@@ -303,13 +302,22 @@ display:block;
 </div>
 
 <script type="text/javascript">
+var flag = 0,beginzs = 0,endzs = 0,num = 0,loc = "";
+var jsonlist = [];
+<% 
+	List<BeanCourse> courselist =(List<BeanCourse>) request.getAttribute("courses"); 
+	for(BeanCourse course:courselist) { 
+%>
+var course = <%=course.toJSON()%>;
+jsonlist.push(course);
+<%} %>
 var dijizhou = getQueryVariable("dijizhou");
 var room = getQueryVariable("room");
+var courseforc =  getQueryVariable("course");
+courseforc = JSON.parse(decodeURI(courseforc));
 initPage();
 
 function initPage(){
-	var courseforc =  getQueryVariable("course");
-	courseforc = JSON.parse(decodeURI(courseforc));
 	$("#resultcoursename")[0].value = courseforc.courseName;
 	$("#resultteacher")[0].value = courseforc.teacher;
 	$("#resultstudent")[0].value = courseforc.student;
@@ -335,6 +343,7 @@ function initPage(){
 	$("#resultzs")[0].value = min + '-' + max + ext;
 	$("#resultjfold")[0].value = courseforc.room;
 	$("#resultjcold")[0].value = courseforc.sectionName;
+	
 }
 
 function getQueryVariable(variable)
@@ -346,47 +355,6 @@ function getQueryVariable(variable)
                if(pair[0] == variable){return pair[1];}
        }
        return(false);
-}
-function funshowzs(){
-	document.getElementsByClassName("zstitle")[0].style.display = "block";
-	document.getElementsByClassName("zhoushu")[0].style.display = "flex";
-	document.getElementsByClassName("zstitle")[0].innerText = "选择周数";
-}
-function zsclick(e){
-	e.target.style.background = "#409EFF";
-	e.target.style.border = "1px solid #409EFF";
-	e.target.style.color = "white";
-	if(flag === 0 ){
-		flag++;
-		beginzs = e.target.innerText;
-	}else if(flag === 1){
-		flag--;
-		endzs = e.target.innerText;
-		var items = $(".zsitem");
-		for(var i=parseInt(beginzs);i<parseInt(endzs);i++){
-			items[i].style.background = "#409EFF";
-			items[i].style.border = "1px solid #409EFF";
-			items[i].style.color = "white";
-		}
-		
-	}
-	
-}
-function zsclick1(e){
-	setTimeout(function(){
-		document.getElementsByClassName("zstitle")[0].style.display = "none";
-		document.getElementsByClassName("zhoushu")[0].style.display = "none";
-		var ds = (e.target.innerText === "无")?"":e.target.innerText;
-		document.getElementById("resultzs").value = beginzs+"-"+endzs+ds;
-		var items = $(".zsitem");
-		for(var i=parseInt(beginzs)-1;i<parseInt(endzs);i++){
-			items[i].style.background = "white";
-			items[i].style.border = "1px solid #a1a1a1";
-			items[i].style.color = "black";
-		}
-		benginzs = 0;
-		endzs = 0;
-	},500)
 }
 function funshowjc(){
 	document.getElementsByClassName("zstitle")[0].innerText = "节次选择";
@@ -508,34 +476,23 @@ function funchangeroom(){
 function funBack(){
 	window.location.href="/course/coursedetail?room="+room+"&dijizhou="+dijizhou;
 }
-function funaddcourse(){
-	var weeks = $("#resultzs")[0].value;
-	var weeklist = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-	if(weeks.slice(-1) === '单' || weeks.slice(-1) === '双'){
-		weeks = weeks.slice(0,-1);
-		var weekl = weeks.split('-');
-		for(var i = parseInt(weekl[0]);i<=parseInt(weekl[1]);i=i+2){
-    		weeklist[i]=1;
-    	}
-	}else{
-		for(var i = parseInt(weeks.split('-')[0]);i<=parseInt(weeks.split('-')[1]);i++){
-			weeklist[i]=1;
-		}
-	}
-	var result = {
-			"courseName":$("#resultcoursename")[0].value,
-			"teacher":$("#resultteacher")[0].value,
-			"student":$("#resultstudent")[0].value,
-			"weeks":weeklist.join(','),
+function funchangecourse(){
+	var newcourse = {
+			"courseName":"",
+			"teacher":"",
+			"student":"",
+			"weeks":"",
 			"sectionName":$("#resultjc")[0].value,
 			"location":loc,
 			"room":$("#resultjf")[0].value
 		}
-	console.log(result);
+	var courselist=[];
+	courselist.push(newcourse);
+	courselist.push(courseforc);
 	$.ajax({
-        url: '/course/addonecourse',
+        url: '/course/updatecourse',
         type: "post",
-        data: JSON.stringify(result),
+        data: JSON.stringify(courselist),
         dataType: "json",
         headers:{'Content-Type':'application/json;charset=utf8'},
         success:function(data){
