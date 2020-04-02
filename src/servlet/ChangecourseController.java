@@ -31,7 +31,6 @@ import javabean.BeanTest;
 @Controller
 public class ChangecourseController {
 	private RoomService roomService;
-	private FirstdateService firstdateService;
 	private CourseService courseService;
 	
 	@RequestMapping("/gotochangecourse")
@@ -53,24 +52,6 @@ public class ChangecourseController {
 		request.getRequestDispatcher("/WEB-INF/jsp/changecourse.jsp").forward(request, response);
 	}
     
-//    @RequestMapping("/changeroom")
-//    @ResponseBody
-//    public JSONArray changeRoom(@RequestBody String room,HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//		ApplicationContext applicationContext=new ClassPathXmlApplicationContext("application.xml");
-//		courseService=(CourseService) applicationContext.getBean("courseService");
-//		List<BeanCourse> courses = new ArrayList<BeanCourse>();
-//		if(room.length()>3) {
-//			room = room.substring(0, 3);
-//		}
-//		courses = courseService.loadCourseList(room);
-//		JSONArray jsonArray = new JSONArray();
-//		for(BeanCourse c:courses) {
-//			jsonArray.add(c.toJSON());
-//		}
-//		return jsonArray;
-//	}
-//    
     @RequestMapping(value="/updatecourse")
 	@ResponseBody
 	public String addRoom(@RequestBody List<BeanCourse> courses,HttpServletRequest request, HttpServletResponse response)
