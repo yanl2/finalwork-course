@@ -66,11 +66,11 @@
 	    	<property name="firstdateDao" ref="firstdateDao"></property>
 	    </bean>
 	    
-	    <bean id="testDao" class="dao.TestDao">
+	    <bean id="softwareDao" class="dao.SoftwareDao">
 	    	<property name="jdbcTemplate" ref="jdbcTemplate"></property>
 	    </bean>
-	    <bean id="testService" class="dao.TestServiceImpl">
-	    	<property name="testDao" ref="testDao"></property>
+	    <bean id="softwareService" class="dao.SoftwareServiceImpl">
+	    	<property name="softwareDao" ref="softwareDao"></property>
 	    </bean>
 	    
 	    

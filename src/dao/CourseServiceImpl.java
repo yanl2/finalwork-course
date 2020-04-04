@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javabean.BeanCourse;
-import javabean.BeanTest;
 
 public class CourseServiceImpl implements CourseService {
 	private CourseDao courseDao;

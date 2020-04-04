@@ -75,6 +75,17 @@
 			.btn2:active{
 				background: rgb(230, 162, 60);
 			}
+			.btn3{
+				background: white;
+				color: black;
+				border: 1px solid black;
+			}
+			.btn3:hover{
+				background: white;
+			}
+			.btn3:active{
+				background: white;
+			}
 			.btn4{
 				background: rgb(245, 108, 108, 1)/* #F56C6C */
 			}
@@ -92,11 +103,12 @@
     <body>
     	<div class="toolbar">
     		<div style="display:flex;">
+				<div class="btn" onclick="gotoaddcourse()">添加课程</div>
 	    		<div class="btn" onclick="funImport()">导入课程</div>
 				<input id="import" style="height:40px;display:none;" type="file"onchange="importf(this)" />  
 	    		<div class="btn btn1" onclick="gotochangecourse()">调换课程</div>
 				<div class="btn btn4" onclick="funallclear()">清空课表</div>
-				<div class="btn btn2" onclick="funBack()">返回主页</div>
+				<div class="btn btn3" onclick="funBack()">返回主页</div>
     		</div>
     		<div id="currentweek" style="margin-right: 15px;line-height:40px;"></div> 	
     	</div>
@@ -422,6 +434,10 @@
             	}else{
             		alert("您还没选择要调换的课程哦!");
             	}
+            }
+
+            function gotoaddcourse(){
+            	window.location.href="addcourse?dijizhou="+dijizhou+"&room="+room;
             }
         </script>
     </body>

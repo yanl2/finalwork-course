@@ -1,7 +1,8 @@
+<%@page import="javabean.BeanSoftware"%>
 <%@page import="javabean.BeanCourse"%>
 <%@page import="javabean.BeanFirstdate"%>
 <%@page import="javabean.BeanRoom"%>
-<%@page import="java.util.List" import="javabean.BeanTest" %>
+<%@page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -53,6 +54,15 @@ html,
 				margin: 10px;
 				position: relative;
 			}
+			.item1 {
+				width: calc(12.35% - 20px);
+				height: 220px;
+				border: 1px solid #a1a1a1;
+				border-style: dashed;
+				margin: 10px;
+				position: relative;
+				cursor:pointer;
+			}
 			
 			.item:hover {
 				color: #A1A1A1;
@@ -70,7 +80,27 @@ html,
 				background: white;
 				text-align: center;
 				position: absolute;
-				top: 40px;
+				top: 15px;
+				left: 0;
+				right: 0;
+				margin: auto;
+				font-size: 30px;
+				z-index: 10;
+			}
+			
+			.itemxiu{
+				cursor: pointer;
+				display: none;
+				width: 50px;
+				height: 50px;
+				line-height: 50px;
+				border: 1px solid #A1A1A1;
+				border-radius: 25px;
+				background: white;
+				text-align: center;
+				position: absolute;
+				top: 0;
+				bottom: 0;
 				left: 0;
 				right: 0;
 				margin: auto;
@@ -89,7 +119,7 @@ html,
 				background: white;
 				text-align: center;
 				position: absolute;
-				bottom: 40px;
+				bottom: 15px;
 				left: 0;
 				right: 0;
 				margin: auto;
@@ -99,6 +129,10 @@ html,
 			}
 			
 			.item:hover .itemxiang {
+				display: block;
+			}
+			
+			.item:hover .itemxiu {
 				display: block;
 			}
 			
@@ -176,6 +210,7 @@ html,
 				top: 0;
 				left: 0;
 				display: none;
+				z-index:11;
 			}
 			.dialog .d-body{
 				width: 45%;
@@ -238,30 +273,42 @@ html,
 				background: white;
 			}
 			.d-main-item{
-				width: calc(100% - 100px);
+				width: 100%;
 				height: 40px;
 				line-height: 40px;
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
-				padding: 20px 100px 20px 0;
+				padding: 20px 0;
 			}
 			.checkbox-group{
-				width: 400px;
+				width: 600px;
 				display: flex;
 				flex-wrap: wrap;
 			}
 			.checkbox-group div{
-				width: 100px;
+				width: 145px;
+			}
+			.img{
+				width:50px;
+				height:50px;
+				background-image: url(./img/add.png);
+				background-repeat: no-repeat;
+				background-size: 100% 100%;
+				position:absolute;
+				top:0;
+				bottom:0;
+				left:0;
+				right:0;
+				margin:auto;
 			}
 </style>
 </head>
 <body>
 		<div class="toolbar">
 			<div style="display:flex">
-				<div class="btn" onclick="funAdd()">新增机房</div>
-				<div class="btn" onclick="gotoaddcourse()">添加课程</div>
 				<div class="btn btn1" onclick="funChangeWeek()">修改当前周</div>
+				<div class="btn btn1" onclick="gotosoftmanager()">软件管理</div>
 				<div class="btn btn3" onclick="location.reload()">刷新</div>
 				<select id="select" onchange="changefun()" style="display:none">
 					<option value="0">第零周</option>
@@ -299,6 +346,7 @@ html,
 			%>
 			<div class="item">
 				<div class="itemxiang" onclick="gotodetail(<%=r.getRoom() %>)">详</div>
+				<div class="itemxiu" onclick='funchangesoft(<%=r.toJSON() %>)'>修</div>
 				<div class="itemshan" onclick="fundelete(<%=r.getRoom() %>)">删</div>
 				<div class="item-body">
 					<div class="item-body-class"><%=r.getRoom() %></div>
@@ -314,6 +362,9 @@ html,
 				</div>
 			</div>
 			<%} %>
+			<div class="item1" onclick="funAdd()">
+				<div class="img"></div>
+			</div>
 		</div>
 		<div class="dialog">
 			<div class="d-body">
@@ -321,18 +372,15 @@ html,
 				<div class="d-main">
 					<div class="d-main-item">
 						<div style="width: 100px;">机房名称</div>
-						<input id="name" style="width: 400px;height: 30px;outline: none;border: 1px solid #A1A1A1;border-radius: 5px;text-indent: 10px;" placeholder="请输入机房名称" />
+						<input id="name" style="width: 600px;height: 30px;outline: none;border: 1px solid #A1A1A1;border-radius: 5px;text-indent: 10px;" placeholder="请输入机房名称" />
 					</div>
 					<div class="d-main-item">
 						<div style="width: 100px;">机房软件</div>
 						<div class="checkbox-group">
-							<div><input type="checkbox" />JavaScript</div> 
-							<div><input type="checkbox" />eclipse</div> 
-							<div><input type="checkbox" />hbuilder</div> 
-							<div><input type="checkbox" />VMware</div> 
-							<div><input type="checkbox" />powerdes</div> 
-							<div><input type="checkbox" />VScode</div> 
-							<div><input type="checkbox" />Chrome</div> 
+							<% List<BeanSoftware> softwares = (List<BeanSoftware>) request.getAttribute("softwares"); 
+								for(BeanSoftware s:softwares){%>
+							<div><input type="checkbox" /><%=s.getSoftware() %></div> 
+							<%} %>
 						</div>
 					</div>
 				</div>
@@ -350,6 +398,29 @@ html,
 				<div class="d-foot">
 					<div class="btn btn1" style="width: 80px;height: 30px;line-height: 30px;" onclick="funcheck1()">确认</div>
 					<div class="btn btn2" style="width: 80px;height: 30px;line-height: 30px;" onclick="funcancel1()">取消</div>
+				</div>
+			</div>
+		</div>
+		<div class="dialog">
+			<div class="d-body">
+				<div class="d-head">修改机房</div>
+				<div class="d-main">
+					<div class="d-main-item">
+						<div style="width: 100px;">机房名称</div>
+						<input id="name1" style="width: 600px;height: 30px;outline: none;border: 1px solid #A1A1A1;border-radius: 5px;text-indent: 10px;" placeholder="请输入机房名称" value="" readonly />
+					</div>
+					<div class="d-main-item">
+						<div style="width: 100px;">机房软件</div>
+						<div class="checkbox-group">
+							<% for(BeanSoftware s:softwares){%>
+							<div><input type="checkbox" /><%=s.getSoftware() %></div> 
+							<%} %>
+						</div>
+					</div>
+				</div>
+				<div class="d-foot">
+					<div class="btn btn1" onclick="funcheck2()">确认</div>
+					<div class="btn btn2" onclick="funcancel2()">取消</div>
 				</div>
 			</div>
 		</div>
@@ -484,8 +555,55 @@ function gotodetail(id){
 function funChangeWeek(){
 	document.getElementById("select").style.display = "block";
 }
-function gotoaddcourse(){
-	window.location.href="addcourse?dijizhou="+dijizhou
+
+function funchangesoft(r){
+	document.getElementById("name1").value = r.room;
+	var resultlist = r.software.split(',');
+	var checkboxgroup = document.getElementsByClassName("checkbox-group")[1].children;
+	for(var i=0;i<checkboxgroup.length;i++){
+		checkboxgroup[i].children[0].checked = false;
+	}
+	for(var j=0;j<resultlist.length;j++){
+		for(var i=0;i<checkboxgroup.length;i++){
+			if(resultlist[j] === checkboxgroup[i].innerText){
+				checkboxgroup[i].children[0].checked = true;
+			}
+		}
+	}
+	currentRoom = r;
+	document.getElementsByClassName("dialog")[2].style.display = 'block';
+}
+function funcheck2(){
+	var result = currentRoom;
+	var resultlist = [];
+	var checkboxgroup = document.getElementsByClassName("checkbox-group")[1].children;
+	for(var i=0;i<checkboxgroup.length;i++){
+		if(checkboxgroup[i].children[0].checked === true){
+			resultlist.push(checkboxgroup[i].innerText)
+		}
+	}
+	result.software = resultlist.join(',');
+	$.ajax({
+        url: '/course/updateRoom',
+        type: "post",
+        data: JSON.stringify(result),
+        dataType: "json",
+        headers:{'Content-Type':'application/json;charset=utf8'},
+        success:function(data){
+        	location.reload();
+        },
+        fail:function(data){
+        	console.log(data)
+        }
+        
+    }); 
+}
+function funcancel2(){
+	document.getElementsByClassName("dialog")[2].style.display = 'none';
+	
+}
+function gotosoftmanager(){
+	window.location.href="softManager";
 }
 </script>
 </body>

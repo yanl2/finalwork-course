@@ -3,7 +3,6 @@ package dao;
 import java.util.List;
 
 import javabean.BeanCourseTable;
-import javabean.BeanTest;
 
 public class CourseTableServiceImpl implements CourseTableService{
 	private CourseTableDao courseTableDao;

@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Bean;
 
 import javabean.BeanCourseTable;
 import javabean.BeanFirstdate;
-import javabean.BeanTest;
 
 public class FirstdateServiceImpl implements FirstdateService{
 	private FirstdateDao firstdateDao;

@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import javabean.BeanCourse;
 import javabean.BeanRoom;
+import javabean.BeanSoftware;
 
 
 
@@ -45,7 +46,10 @@ public class RoomDao {
 		this.jdbcTemplate.update(sql,room);
 	}
 	
-	
+	public void updateRoom(BeanRoom room) {
+		String sql = "update room set software = ? where room = ?";
+		this.jdbcTemplate.update(sql,room.getSoftware(),room.getRoom());
+	}
 	
 	
 }

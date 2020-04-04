@@ -63,5 +63,10 @@ public class RoomServiceImpl implements RoomService {
 		rooms = (List<BeanRoom>) roomDao.loadRooms();
 		return rooms;
 	}
+	
+	@Override
+	public void updateRoom(BeanRoom room) {
+		roomDao.updateRoom(room);
+	}
 
 }

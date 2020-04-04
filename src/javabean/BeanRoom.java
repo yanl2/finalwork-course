@@ -1,5 +1,7 @@
 package javabean;
 
+import com.alibaba.fastjson.JSONObject;
+
 public class BeanRoom {
 	private int id;
 	private String room;
@@ -45,7 +47,14 @@ public class BeanRoom {
 		this.course = course;
 	}
 	
-	
+	public JSONObject toJSON() {
+		JSONObject jObject=new JSONObject();
+    	jObject.put("id", this.id);
+    	jObject.put("room", this.room);
+    	jObject.put("software", this.software);
+		return jObject;
+		
+	}
 	
 
 }

@@ -10,7 +10,6 @@ import org.springframework.jdbc.core.RowMapper;
 
 import javabean.BeanCourse;
 import javabean.BeanCourseTable;
-import javabean.BeanTest;
 
 
 

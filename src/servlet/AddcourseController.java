@@ -21,11 +21,9 @@ import dao.CourseService;
 import dao.FirstdateDao;
 import dao.FirstdateService;
 import dao.RoomService;
-import dao.TestService;
 import javabean.BeanCourse;
 import javabean.BeanFirstdate;
 import javabean.BeanRoom;
-import javabean.BeanTest;
 
 @Controller
 public class AddcourseController {

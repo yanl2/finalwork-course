@@ -28,28 +28,32 @@ import dao.CourseService;
 import dao.FirstdateDao;
 import dao.FirstdateService;
 import dao.RoomService;
-import dao.TestService;
+import dao.SoftwareService;
 import javabean.BeanCourse;
 import javabean.BeanFirstdate;
 import javabean.BeanRoom;
-import javabean.BeanTest;
+import javabean.BeanSoftware;
 
 @Controller
 public class HomeController {
 	private RoomService roomService;
 	private FirstdateService firstdateService;
+	private SoftwareService softwareService;
 	@RequestMapping("/home")
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 		ApplicationContext applicationContext=new ClassPathXmlApplicationContext("application.xml");
 		roomService=(RoomService)applicationContext.getBean("roomService");	
 		firstdateService = (FirstdateService)applicationContext.getBean("firstdateService");
-		//System.out.println(getLocation());
+		softwareService = (SoftwareService)applicationContext.getBean("softwareService");
     	List<BeanRoom> list = roomService.loadRooms(getLocation());
     	request.setAttribute("list",list);
     	BeanFirstdate firstdate = new BeanFirstdate();
     	firstdate = firstdateService.finddateByXueqi("16-17(1)");
     	request.setAttribute("firstdate", firstdate);
+    	List<BeanSoftware> softwares = new ArrayList<BeanSoftware>();
+    	softwares = softwareService.loadAll();
+    	request.setAttribute("softwares", softwares);
 		request.getRequestDispatcher("/WEB-INF/jsp/home.jsp").forward(request, response);
 	}
 	
@@ -132,5 +136,16 @@ public class HomeController {
             e.printStackTrace();  
         }
         return result;
+	}
+	
+	@RequestMapping(value="/updateRoom")
+	@ResponseBody
+	public String updateRoom(@RequestBody BeanRoom room,HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException{
+		response.setContentType("application/json");
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("application.xml");
+    	roomService=(RoomService) applicationContext.getBean("roomService");
+		roomService.updateRoom(room);
+		return "1";
 	}
 }

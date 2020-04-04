@@ -77,6 +77,17 @@ input{
 .btn2:active{
 	background: rgb(230, 162, 60);
 }
+.btn3{
+	background: white;
+	color: black;
+	border: 1px solid black;
+}
+.btn3:hover{
+	background: white;
+}
+.btn3:active{
+	background: white;
+}
 .zhoushu{
 height:40px;
 width:calc(80% - 10px);
@@ -177,7 +188,7 @@ display:block;
 </style>
 </head>
 <body>
-<div class="btn btn2" style="position:absolute;top:10px;" onclick="funBack()">返 回</div>
+<div class="btn btn3" style="position:absolute;top:10px;" onclick="funBack()">返 回</div>
 <div class="line" style="margin-top:10px;">
 	<div class="line-item">
 		<div class="line-item-label">课程名称</div>
