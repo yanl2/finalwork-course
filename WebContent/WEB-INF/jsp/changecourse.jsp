@@ -325,6 +325,7 @@ jsonlist.push(course);
 var dijizhou = getQueryVariable("dijizhou");
 var room = getQueryVariable("room");
 var courseforc =  getQueryVariable("course");
+console.log(courseforc)
 courseforc = JSON.parse(decodeURI(courseforc));
 initPage();
 

@@ -492,7 +492,7 @@ function funcheck(){
 			resultlist.push(checkboxgroup[i].innerText)
 		}
 	}
-	var result = {"id":0,"room":name,"software":resultlist.join(',')};
+	var result = {"room":name,"software":resultlist.join(',')};
 	$.ajax({
         url: '/course/addRoom',
         type: "post",
@@ -519,7 +519,7 @@ function fundelete(room){
 	document.getElementsByClassName('dialog')[1].style.display = 'block';
 }
 function funcheck1(){
-	var result = {"id":0,"room":currentRoom,"software":""};
+	var result = {"room":currentRoom,"software":""};
 	$.ajax({
         url: '/course/deleteRoom?room='+currentRoom,
         type: "post",

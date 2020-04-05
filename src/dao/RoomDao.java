@@ -21,12 +21,8 @@ public class RoomDao {
 	}
 	
 	public void createRoom(BeanRoom room) {
-		BeanRoom room2=new BeanRoom();
-    	String sql = "select max(id) from room";
-    	RowMapper<BeanRoom> rowMapper=new BeanPropertyRowMapper<BeanRoom>(BeanRoom.class);
-        room2 = this.jdbcTemplate.queryForObject(sql,rowMapper);
-		sql="insert into room(id,room,software) value(?,?,?)";
-		this.jdbcTemplate.update(sql,room2.getId(),room.getRoom(),room.getSoftware());
+		String sql="insert into room(room,software) value(?,?)";
+		this.jdbcTemplate.update(sql,room.getRoom(),room.getSoftware());
 	}
 	
 	public List<BeanRoom> loadRooms(){
