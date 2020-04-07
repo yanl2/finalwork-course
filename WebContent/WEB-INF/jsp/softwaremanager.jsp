@@ -206,6 +206,9 @@ function funBack(){
 }
 function funcheck(){
 	var result = {software:$('#name')[0].value};
+	if(result.software == ''){
+		return alert("您还没输入机房软件名称哦！")
+	}
 	$.ajax({
         url: '/course/addSoft',
         type: "post",

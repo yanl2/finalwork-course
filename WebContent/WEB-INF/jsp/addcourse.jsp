@@ -378,6 +378,11 @@ function zsclick1(e){
 	},500)
 }
 function funshowjc(){
+	if(document.getElementById("resultzs").value == ""){
+		return alert("请先选择周数哦！")
+	}else if(document.getElementById("resultjf").value == ""){
+		return alert("请先选择机房哦！")
+	}
 	document.getElementsByClassName("zstitle")[0].innerText = "节次选择";
 	document.getElementsByClassName("zstitle")[0].style.display = "block";
 	document.getElementsByClassName("jieci")[0].style.display = "block";
@@ -404,6 +409,9 @@ function jcclick(e,i){
 	
 }
 function funshowjf(){
+	if(document.getElementById("resultzs").value == ""){
+		return alert("请先选择周数哦！")
+	}
 	document.getElementsByClassName("zstitle")[0].innerText = "机房选择";
 	document.getElementsByClassName("zstitle")[0].style.display = "block";
 	document.getElementsByClassName("jifang")[0].style.display = "block";
@@ -521,6 +529,19 @@ function funaddcourse(){
 			"room":$("#resultjf")[0].value
 		}
 	console.log(result);
+	if(result.courseName == ''){
+		return alert("您还没输入课程名称哦！")
+	}else if(result.teacher == ''){
+		return alert("您还没输入授课教师哦！")
+	}else if(result.student == ''){
+		return alert("您还没输入上课学生哦！")
+	}else if(result.weeks == ''){
+		return alert("您还没选择周数哦！")
+	}else if(result.room == ''){
+		return alert("您还没选择机房哦！")
+	}else if(result.sectionName == ''){
+		return alert("您还没选择节次哦！")
+	}
 	$.ajax({
         url: '/course/addonecourse',
         type: "post",

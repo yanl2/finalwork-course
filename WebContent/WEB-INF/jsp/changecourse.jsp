@@ -369,6 +369,9 @@ function getQueryVariable(variable)
        return(false);
 }
 function funshowjc(){
+	if(document.getElementById("resultjf").value == ""){
+		return alert("请先选择机房哦！")
+	}
 	document.getElementsByClassName("zstitle")[0].innerText = "节次选择";
 	document.getElementsByClassName("zstitle")[0].style.display = "block";
 	document.getElementsByClassName("jieci")[0].style.display = "block";
@@ -501,6 +504,11 @@ function funchangecourse(){
 	var courselist=[];
 	courselist.push(newcourse);
 	courselist.push(courseforc);
+	if(courselist[0].room == ''){
+		return alert("请先选择新机房哦！")
+	}else if(courselist[0].sectionName == ''){
+		return alert("请先选择节次哦！")
+	}
 	$.ajax({
         url: '/course/updatecourse',
         type: "post",

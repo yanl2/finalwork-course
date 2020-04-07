@@ -493,6 +493,11 @@ function funcheck(){
 		}
 	}
 	var result = {"room":name,"software":resultlist.join(',')};
+	if(result.room == ''){
+		return alert("您还没输入机房名称哦！")
+	}else if(result.software == ''){
+		return alert("您还没选机房软件哦！")
+	}
 	$.ajax({
         url: '/course/addRoom',
         type: "post",
@@ -583,6 +588,9 @@ function funcheck2(){
 		}
 	}
 	result.software = resultlist.join(',');
+	if(result.software == ''){
+		return alert("机房软件不能为空哦！")
+	}
 	$.ajax({
         url: '/course/updateRoom',
         type: "post",
