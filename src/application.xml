@@ -44,13 +44,6 @@
 	    	<property name="courseDao" ref="courseDao"></property>
 	    </bean>
 	    
-	    <bean id="courseTableDao" class="dao.CourseTableDao">
-	    	<property name="jdbcTemplate" ref="jdbcTemplate"></property>
-	    </bean>
-	    <bean id="courseTableService" class="dao.CourseTableServiceImpl">
-	    	<property name="courseTableDao" ref="courseTableDao"></property>
-	    </bean>
-	    
 	    <bean id="roomDao" class="dao.RoomDao">
 	    	<property name="jdbcTemplate" ref="jdbcTemplate"></property>
 	    </bean>

@@ -9,7 +9,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.aspectj.weaver.ast.Var;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -17,18 +16,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-
 import dao.CourseService;
+import dao.RoomService;
 import javabean.BeanCourse;
-import javabean.BeanCourseTable;
+import javabean.BeanRoom;
 
 
 @Controller
 public class CoursedetailController {
 	private CourseService courseService;
+	private RoomService roomService;
 	@RequestMapping("/coursedetail")
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -40,6 +37,23 @@ public class CoursedetailController {
 		courses = courseService.loadCourseList(room);
 		request.setAttribute("courses", courses);
 		request.getRequestDispatcher("/WEB-INF/jsp/coursedetail.jsp").forward(request, response);
+    }
+	
+	@RequestMapping("/coursedetailshow")
+	public void coursedetailshow(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("application.xml");
+		courseService=(CourseService) applicationContext.getBean("courseService");
+		String room = request.getParameter("room");
+		request.setAttribute("dijizhou", request.getParameter("dijizhou"));
+		List<BeanCourse> courses = new ArrayList<BeanCourse>();
+		courses = courseService.loadCourseList(room);
+		request.setAttribute("courses", courses);
+		roomService=(RoomService) applicationContext.getBean("roomService");
+		List<BeanRoom> rooms = new ArrayList<BeanRoom>();
+		rooms = roomService.loadRooms();
+		request.setAttribute("rooms", rooms);
+		request.getRequestDispatcher("/WEB-INF/jsp/coursedetailshow.jsp").forward(request, response);
     }
 	
 	@RequestMapping(value="/coursetable")

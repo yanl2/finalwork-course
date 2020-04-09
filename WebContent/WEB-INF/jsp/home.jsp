@@ -335,6 +335,7 @@ html,
 				</select>
 			</div>
 			<div style="display: flex;line-height: 40px;">
+				<div class="btn btn3" onclick="window.location.href='homeshow'">进入前台</div>	
 				<div id="date"></div>
 				<div id="currentweek" style="margin-right: 15px;"></div>
 			</div>

@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="5;url=home"> 
+<!---<meta http-equiv="refresh" content="5;url=home"> -->
 <title>Welcome</title>
 <style type="text/css">
 html,body{
@@ -11,25 +11,99 @@ height:100%;
 margin:0;
 padding:0;
 }
+body{
+position:relative;
+}
 .divForm{
-position: absolute;/*绝对定位*/
-width: 300px;
-height: 240px;
-
-text-align: center;/*(让div中的内容居中)*/
-top: 50%;
-left: 50%;
-margin-top: -110px;
-margin-left: -150px;
+position: absolute;
+height:20px;
+line-height:20px;
+text-align: center;
+top: 300px;
+right:0;
+left: 0;
+margin:auto;
+}
+.btn {
+	position:absolute;
+	top:400px;
+	left:0;
+	right:0;
+	margin:auto;
+	height: 40px;
+	line-height: 40px;
+	width: 100px;
+	text-align: center;
+	border:1px solid #409EFF;
+	border-radius: 5px;
+	background: white;
+	color: #409EFF;
+	cursor: pointer;
+}
+.btn:hover {
+	background: rgba(64, 159, 255, 0.1);
+}
+.btn:active{
+	background: white;
+}
+.btn3{
+	background: white;
+	color: black;
+	border: 1px solid black;
+}
+.btn3:hover{
+	background: #a1a1a1;
+}
+.btn3:active{
+	background: white;
+}
+.input{
+position:absolute;
+top:400px;
+left:0;
+right:0;
+margin:auto;
+display:flex;
+justify-content:center;
+display:none;
+}
+input{
+height:30px;
+line-height:30px;
+border:1px solid #a1a1a1;
+border-radius:5px;
+text-indent:10px;
+outline:none;
+}
+.login{
+	height: 30px;
+	line-height: 30px;
+	width: 100px;
+	text-align: center;
+	border-radius: 5px;
+	cursor: pointer;
+	background: white;
+	color: black;
+	border: 1px solid black;
+	margin: 0 10px;
+}
+.login:hover{
+	background: #a1a1a1;
+}
+.login:active{
+	background: white;
 }
 </style>
 </head>
-<body onload="run()" style="background-image: url(img/background.jpg);background-repeat: repeat-y;background-size: 100% auto;">
+<body style="background-image: url(img/background.jpg);background-repeat: repeat-y;background-size: 100% auto;">
 
-<div class="divForm">
-   <div><strong>欢迎进入实验中心课表展示系统!</strong></div>
+<div class="divForm"><strong>欢迎进入实验中心课表展示系统!</strong></div>
+<div class="btn" onclick="window.location.href='homeshow'">前台展示</div>
+<div class="btn btn3" style="top:450px;" onclick="showlogin()">后台管理</div>	
+<div class="input">
+	<input id="pwd" placeholder="请输入今日六位登录密码！"/>
+<div class="login" onclick="gotohome()">进入后台</div>	
 </div>
-	
 	
 </body>
 <br><script type="text/javascript">
@@ -39,6 +113,20 @@ margin-left: -150px;
         //span.innerHTML = x;
         x--;
         window.setTimeout("run()", 1000);
+    }
+    function showlogin(){
+    	document.getElementsByClassName("btn")[0].style.display = "none";
+    	document.getElementsByClassName("btn")[1].style.display = "none";
+    	document.getElementsByClassName("input")[0].style.display = "flex";
+    }
+    function gotohome(){
+    	var pwd = document.getElementById("pwd").value;
+    	if(pwd[6] === undefined && pwd[5] != undefined){
+    		sessionStorage.setItem("course",pwd);
+    		window.location.href="home";
+    	}else{
+    		return alert("请输入六位数密码哦！")
+    	}
     }
      
 </script>

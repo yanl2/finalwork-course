@@ -57,6 +57,24 @@ public class HomeController {
 		request.getRequestDispatcher("/WEB-INF/jsp/home.jsp").forward(request, response);
 	}
 	
+	@RequestMapping("/homeshow")
+	public void homeshow(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+		ApplicationContext applicationContext=new ClassPathXmlApplicationContext("application.xml");
+		roomService=(RoomService)applicationContext.getBean("roomService");	
+		firstdateService = (FirstdateService)applicationContext.getBean("firstdateService");
+		softwareService = (SoftwareService)applicationContext.getBean("softwareService");
+    	List<BeanRoom> list = roomService.loadRooms(getLocation());
+    	request.setAttribute("list",list);
+    	BeanFirstdate firstdate = new BeanFirstdate();
+    	firstdate = firstdateService.finddateByXueqi("16-17(1)");
+    	request.setAttribute("firstdate", firstdate);
+    	List<BeanSoftware> softwares = new ArrayList<BeanSoftware>();
+    	softwares = softwareService.loadAll();
+    	request.setAttribute("softwares", softwares);
+		request.getRequestDispatcher("/WEB-INF/jsp/homeshow.jsp").forward(request, response);
+	}
+	
 	@RequestMapping(value="/addRoom")
 	@ResponseBody
 	public String addRoom(@RequestBody BeanRoom o,HttpServletRequest request, HttpServletResponse response)

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 
-import javabean.BeanCourseTable;
 import javabean.BeanFirstdate;
 
 public class FirstdateServiceImpl implements FirstdateService{
