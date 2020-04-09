@@ -24,39 +24,6 @@ right:0;
 left: 0;
 margin:auto;
 }
-.btn {
-	position:absolute;
-	top:400px;
-	left:0;
-	right:0;
-	margin:auto;
-	height: 40px;
-	line-height: 40px;
-	width: 100px;
-	text-align: center;
-	border:1px solid #409EFF;
-	border-radius: 5px;
-	background: white;
-	color: #409EFF;
-	cursor: pointer;
-}
-.btn:hover {
-	background: rgba(64, 159, 255, 0.1);
-}
-.btn:active{
-	background: white;
-}
-.btn3{
-	background: white;
-	color: black;
-	border: 1px solid black;
-}
-.btn3:hover{
-	background: #a1a1a1;
-}
-.btn3:active{
-	background: white;
-}
 .input{
 position:absolute;
 top:400px;
@@ -65,7 +32,6 @@ right:0;
 margin:auto;
 display:flex;
 justify-content:center;
-display:none;
 }
 input{
 height:30px;
@@ -98,8 +64,6 @@ outline:none;
 <body style="background-image: url(img/background.jpg);background-repeat: repeat-y;background-size: 100% auto;">
 
 <div class="divForm"><strong>欢迎进入实验中心课表展示系统!</strong></div>
-<div class="btn" onclick="window.location.href='homeshow'">前台展示</div>
-<div class="btn btn3" style="top:450px;" onclick="showlogin()">后台管理</div>	
 <div class="input">
 	<input id="pwd" placeholder="请输入今日六位登录密码！"/>
 <div class="login" onclick="gotohome()">进入后台</div>	
@@ -113,11 +77,6 @@ outline:none;
         //span.innerHTML = x;
         x--;
         window.setTimeout("run()", 1000);
-    }
-    function showlogin(){
-    	document.getElementsByClassName("btn")[0].style.display = "none";
-    	document.getElementsByClassName("btn")[1].style.display = "none";
-    	document.getElementsByClassName("input")[0].style.display = "flex";
     }
     function gotohome(){
     	var pwd = document.getElementById("pwd").value;
