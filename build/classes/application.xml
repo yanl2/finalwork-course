@@ -65,6 +65,12 @@
 	    <bean id="softwareService" class="dao.SoftwareServiceImpl">
 	    	<property name="softwareDao" ref="softwareDao"></property>
 	    </bean>
+	    <bean id="userDao" class="dao.UserDao">
+	    	<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	    </bean>
+	    <bean id="userService" class="dao.UserServiceImpl">
+	    	<property name="userDao" ref="userDao"></property>
+	    </bean>
 	    
 	    
 	   

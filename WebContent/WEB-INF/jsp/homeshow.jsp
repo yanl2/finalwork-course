@@ -48,6 +48,7 @@ html,
 			
 			.item {
 				width: calc(12.35% - 20px);
+				min-width:187px;
 				height: 220px;
 				border: 1px solid #a1a1a1;
 				border-style: dashed;
@@ -214,7 +215,7 @@ html,
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
-				padding: 20px 0;
+				padding: 10px 0;
 			}
 </style>
 </head>
@@ -251,15 +252,21 @@ html,
 		</div>
 		<div class="dialog">
 			<div class="d-body">
-				<div class="d-head">请验证今日密码</div>
+				<div class="d-head">请先登录</div>
 				<div class="d-main">
-					<div class="d-main-item">
-						<div style="width: 100px;">今日密码</div>
-						<input id="login" style="width: 600px;height: 30px;outline: none;border: 1px solid #A1A1A1;border-radius: 5px;text-indent: 10px;" placeholder="请输入今日密码" value="" />
-					</div>
+					<form action="checklogin" method="post" >
+						<div class="d-main-item">
+							<div style="width:100px">用户名</div>
+							<input style="width: 600px;height: 30px;outline: none;border: 1px solid #A1A1A1;border-radius: 5px;text-indent: 10px;" id="name" name="name" placeholder="请输入用户名">
+						</div>
+						<div class="d-main-item">
+							<div style="width:100px">密码</div>
+							<input style="width: 600px;height: 30px;outline: none;border: 1px solid #A1A1A1;border-radius: 5px;text-indent: 10px;" id="pwd" name="pwd" placeholder="请输入密码">
+						</div>
+					</form>
 				</div>
 				<div class="d-foot">
-					<div class="btn btn1" onclick="funcheck()">确认</div>
+					<div class="btn btn1" onclick="checklogin()">确认</div>
 					<div class="btn btn2" onclick="funcancel()">取消</div>
 				</div>
 			</div>
@@ -301,13 +308,17 @@ function gotodetail(id){
 function gotohoutai(){
 	document.getElementsByClassName("dialog")[0].style.display = "block";
 }
-function funcheck(){
-	var result = sessionStorage.getItem("course");
-	var login = document.getElementById("login").value;
-	if(result === login){
-		window.location.href = "home";
+function checklogin(){
+	var name=document.getElementById("name")
+	var pwd=document.getElementById("pwd");
+	if(""===name.value){
+		alert("用户名为空");
+		event.preventDefault();
+	}else if(""===pwd.value){
+		alert("密码为空");
+		event.preventDefault();
 	}else{
-		return alert("密码错误哦！");
+		document.forms[0].submit();
 	}
 }
 function funcancel(){

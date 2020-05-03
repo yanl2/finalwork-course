@@ -33,60 +33,61 @@ margin:auto;
 display:flex;
 justify-content:center;
 }
-input{
-height:30px;
-line-height:30px;
-border:1px solid #a1a1a1;
-border-radius:5px;
-text-indent:10px;
-outline:none;
+.btn_box{
+position:absolute;
+top:400px;
+left:0;
+right:0;
+margin:auto;
+display:flex;
+justify-content:center;
 }
-.login{
-	height: 30px;
-	line-height: 30px;
+.btn {
+	height: 40px;
+	line-height: 40px;
+	margin: 10px;
 	width: 100px;
 	text-align: center;
 	border-radius: 5px;
+	background: #409EFF;
+	color: white;
 	cursor: pointer;
-	background: white;
-	color: black;
-	border: 1px solid black;
-	margin: 0 10px;
 }
-.login:hover{
-	background: #a1a1a1;
+
+.btn:hover {
+	background: #66b1ff;
 }
-.login:active{
-	background: white;
+
+.btn:active {
+	background: #409EFF;
+}
+.btn1{
+	background: rgb(101, 194, 58);
+}
+.btn1:hover{
+	background: rgb(101, 194, 58, 0.7);
+}
+.btn1:active{
+	background: rgb(101, 194, 58);
 }
 </style>
 </head>
 <body style="background-image: url(img/background.jpg);background-repeat: repeat-y;background-size: 100% auto;">
 
 <div class="divForm"><strong>欢迎进入实验中心课表展示系统!</strong></div>
-<div class="input">
-	<input id="pwd" placeholder="请输入今日六位登录密码！"/>
-<div class="login" onclick="gotohome()">进入后台</div>	
+<div class="btn_box">
+	<div class="btn" onclick="gotohomeshow()">进入前台</div>
+	<div class="btn btn1" onclick="login()">进入后台</div>
 </div>
 	
 </body>
 <br><script type="text/javascript">
-    var x = 5;
-    function run(){
-        var span = document.getElementById("spanId");
-        //span.innerHTML = x;
-        x--;
-        window.setTimeout("run()", 1000);
-    }
-    function gotohome(){
-    	var pwd = document.getElementById("pwd").value;
-    	if(pwd[6] === undefined && pwd[5] != undefined){
-    		sessionStorage.setItem("course",pwd);
-    		window.location.href="home";
-    	}else{
-    		return alert("请输入六位数密码哦！")
-    	}
-    }
+	function gotohomeshow(){
+		window.location.href="homeshow";
+	}
+	function login(){
+		window.location.href="login"
+	}
      
 </script>
 

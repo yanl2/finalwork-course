@@ -48,6 +48,7 @@ html,
 			
 			.item {
 				width: calc(12.35% - 20px);
+				min-width:187px;
 				height: 220px;
 				border: 1px solid #a1a1a1;
 				border-style: dashed;
@@ -56,6 +57,7 @@ html,
 			}
 			.item1 {
 				width: calc(12.35% - 20px);
+				min-width:187px;
 				height: 220px;
 				border: 1px solid #a1a1a1;
 				border-style: dashed;

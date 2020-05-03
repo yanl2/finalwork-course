@@ -1,7 +1,5 @@
 package javabean;
 
-import java.util.List;
-
 import com.alibaba.fastjson.JSONObject;
 
 public class BeanCourse {

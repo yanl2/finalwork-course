@@ -55,14 +55,17 @@ public class AddcourseController {
 		ApplicationContext applicationContext=new ClassPathXmlApplicationContext("application.xml");
 		courseService=(CourseService) applicationContext.getBean("courseService");
 		List<BeanCourse> courses = new ArrayList<BeanCourse>();
+		System.out.println(123);
 		if(room.length()>3) {
 			room = room.substring(0, 3);
 		}
+		System.out.print(room);
 		courses = courseService.loadCourseList(room);
 		JSONArray jsonArray = new JSONArray();
 		for(BeanCourse c:courses) {
 			jsonArray.add(c.toJSON());
 		}
+		System.out.print(jsonArray);
 		return jsonArray;
 	}
     

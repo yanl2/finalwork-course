@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<!---<meta http-equiv="refresh" content="5;url=home"> -->
+<title>Welcome</title>
+<style type="text/css">
+html,body{
+width:100%;
+height:100%;
+margin:0;
+padding:0;
+}
+body{
+position:relative;
+}
+.divForm{
+position: absolute;
+height:20px;
+line-height:20px;
+text-align: center;
+top: 300px;
+right:0;
+left: 0;
+margin:auto;
+}
+.input{
+position:absolute;
+top:400px;
+left:0;
+right:0;
+margin:auto;
+display:flex;
+justify-content:center;
+}
+.btn_box{
+position:absolute;
+top:400px;
+left:0;
+right:0;
+margin:auto;
+display:flex;
+justify-content:center;
+}
+input{
+height:30px;
+line-height:30px;
+border:1px solid #a1a1a1;
+border-radius:5px;
+text-indent:10px;
+outline:none;
+}
+.login{
+	height: 30px;
+	line-height: 30px;
+	width: 100px;
+	text-align: center;
+	border-radius: 5px;
+	cursor: pointer;
+	background: white;
+	color: black;
+	border: 1px solid black;
+	margin: 0 10px;
+}
+.login:hover{
+	background: #a1a1a1;
+}
+.login:active{
+	background: white;
+}
+.btn {
+				height: 40px;
+				line-height: 40px;
+				margin: 10px;
+				width: 100px;
+				text-align: center;
+				border-radius: 5px;
+				background: #409EFF;
+				color: white;
+				cursor: pointer;
+			}
+			
+			.btn:hover {
+				background: #66b1ff;
+			}
+			
+			.btn:active {
+				background: #409EFF;
+			}
+			.btn1{
+				background: rgb(101, 194, 58);
+			}
+			.btn1:hover{
+				background: rgb(101, 194, 58, 0.7);
+			}
+			.btn1:active{
+				background: rgb(101, 194, 58);
+			}
+</style>
+</head>
+<body style="background-image: url(img/background.jpg);background-repeat: repeat-y;background-size: 100% auto;">
+
+<div class="divForm"><strong>欢迎进入实验中心课表展示系统!</strong></div>
+<!-- <div class="input">
+	<input id="pwd" placeholder="请输入今日六位登录密码！"/>
+	<div class="login" onclick="gotohome()">进入后台</div>	
+</div> -->
+<div class="input" id="logon">
+	<form action="checklogon" method="post" >
+		<div></div><br>
+		<input id="name1" name="name" placeholder="用户名"><br>
+		<div></div><br>
+		<input id="pwd1" name="pwd1" placeholder="密码"><br>
+		<div></div><br>
+		<input id="pwd2" name="pwd2" placeholder="确认密码"><br>
+		<div></div><br>
+		<div class="btn" onclick="checklogon()">确认注册</div>
+		<div></div><br>
+	</form>
+</div>
+	
+</body>
+<br><script type="text/javascript">
+	function checklogon(){
+		var name=document.getElementById("name1")
+		var pwd1=document.getElementById("pwd1");
+		var pwd2=document.getElementById("pwd2");
+		if(""===name.value){
+			alert("用户名为空");
+			event.preventDefault();
+		}else if(""===pwd1||pwd2 === ''){
+			alert("密码为空");
+			event.preventDefault();
+		}else if(pwd1.value != pwd2.value){
+			alert("两次密码输入不同哦，请重新输入")
+			event.preventDefault();
+		}else if(!(pwd1.value[6] === undefined && pwd1.value[5] != undefined)){
+			alert("请输入六位数密码哦！")
+			event.preventDefault();
+		}else if(!(pwd2.value[6] === undefined && pwd2.value[5] != undefined)){
+			alert("请输入六位数密码哦！")
+			event.preventDefault();
+		}else{
+			document.forms[0].submit();
+		}
+	}
+     
+</script>
+
+</html>

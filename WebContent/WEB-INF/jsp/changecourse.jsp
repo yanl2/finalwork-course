@@ -185,6 +185,80 @@ top:150px;
 right:180px;
 display:block;
 }
+.mytr{
+				display: flex;
+				align-items: center;
+				justify-content: flex-start;
+			}
+			.mythead .myth{
+				width: 235px;
+				height: 40px;
+				line-height: 50px;
+				text-align: center;
+				font-weight: bolder;
+			}
+			.mythead .myth:first-of-type{
+				width: 50px;
+				text-align: center;
+				border-left: 1px solid black;
+			}
+			.myth{
+				width: 50px;
+				height: 130px;
+				border-right: 1px solid black;
+				border-top: 1px solid black;
+				border-bottom: 1px solid black;
+				text-align: center;
+				font-weight: bolder;
+			}
+			.mytbody .myth{
+				border-top: 0px;
+				border-left: 1px solid black;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			.mytbody{
+				line-height: 27px;
+				text-align: center;
+				font-size:16px;
+			}
+			.mytd{
+				width: 235px;
+				height: 130px;
+				border-right: 1px solid black;
+				border-bottom: 1px solid black;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				cursor:pointer;
+			}
+			.half{
+				width: 50%;
+				height: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-direction: column;
+				border-right: 1px solid black;
+			}
+			.all{
+				width: 100%;
+				height: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-direction: column;
+			}
+			.mytd:hover{
+				background: rgba(64, 158, 255, 0.4)
+			}
+			.mytd .half:last-of-type{
+				border-right: 0px;
+			}
+			.font{
+				width: 100%;line-height:18px;height: 36px;white-space:normal; word-break:break-all;overflow:hidden;
+			}
 </style>
 </head>
 <body>
@@ -244,7 +318,73 @@ display:block;
 		<option><%=r.getRoom() %></option>
 		<%} %>
 	</select>
- <table border="1" style="border-collapse: collapse;width: 100%;margin-top:5px;">
+	<div class="mytable">
+				<div class="mythead">
+					<div class="mytr">
+						<div class="myth">节次</div>
+						<div class="myth">星期一</div>
+						<div class="myth">星期二</div>
+						<div class="myth">星期三</div>
+						<div class="myth">星期四</div>
+						<div class="myth">星期五</div>
+						<div class="myth">星期六</div>
+						<div class="myth">星期日</div>
+					</div>
+				</div>
+				<div class="mytbody">
+					<div class="mytr">
+						<div class="myth">第<br />一<br />二<br />节</div>
+						<div class="mytd" data-loc="1,1"></div>
+						<div class="mytd" data-loc="1,2"></div>
+						<div class="mytd" data-loc="1,3"></div>
+						<div class="mytd" data-loc="1,4"></div>
+						<div class="mytd" data-loc="1,5"></div>
+						<div class="mytd" data-loc="1,6"></div>
+						<div class="mytd" data-loc="1,7"></div>
+					</div>
+					<div class="mytr">
+						<div class="myth">第<br />三<br />四<br />五<br />节</div>
+						<div class="mytd" data-loc="2,1"></div>
+						<div class="mytd" data-loc="2,2"></div>
+						<div class="mytd" data-loc="2,3"></div>
+						<div class="mytd" data-loc="2,4"></div>
+						<div class="mytd" data-loc="2,5"></div>
+						<div class="mytd" data-loc="2,6"></div>
+						<div class="mytd" data-loc="2,7"></div>
+					</div>
+					<div class="mytr">
+						<div class="myth">第<br />六<br />七<br />节</div>
+						<div class="mytd" data-loc="3,1"></div>
+						<div class="mytd" data-loc="3,2"></div>
+						<div class="mytd" data-loc="3,3"></div>
+						<div class="mytd" data-loc="3,4"></div>
+						<div class="mytd" data-loc="3,5"></div>
+						<div class="mytd" data-loc="3,6"></div>
+						<div class="mytd" data-loc="3,7"></div>
+					</div>
+					<div class="mytr">
+						<div class="myth">第<br />八<br />九<br />节</div>
+						<div class="mytd" data-loc="4,1"></div>
+						<div class="mytd" data-loc="4,2"></div>
+						<div class="mytd" data-loc="4,3"></div>
+						<div class="mytd" data-loc="4,4"></div>
+						<div class="mytd" data-loc="4,5"></div>
+						<div class="mytd" data-loc="4,6"></div>
+						<div class="mytd" data-loc="4,7"></div>
+					</div>
+					<div class="mytr">
+						<div class="myth">第<br />十<br />11<br />12<br />节</div>
+						<div class="mytd" data-loc="5,1"></div>
+						<div class="mytd" data-loc="5,2"></div>
+						<div class="mytd" data-loc="5,3"></div>
+						<div class="mytd" data-loc="5,4"></div>
+						<div class="mytd" data-loc="5,5"></div>
+						<div class="mytd" data-loc="5,6"></div>
+						<div class="mytd" data-loc="5,7"></div>
+					</div>
+				</div>		
+			</div>
+ <!-- <table border="1" style="border-collapse: collapse;width: 100%;margin-top:5px;">
 		<thead style="width: 100%;">
 			<tr style="height: 40px;">
 				<th style="width: 50px;">节次</th>
@@ -309,7 +449,7 @@ display:block;
 				<td></td>
 			</tr>
 		</tbody>
-	</table>
+	</table> -->
 </div>
 
 <script type="text/javascript">
@@ -402,37 +542,28 @@ function funshowjf(){
 	document.getElementsByClassName("zstitle")[0].style.display = "block";
 	document.getElementsByClassName("jifang")[0].style.display = "block";
 	$(function(){
-		$("td").hover(function(e){
-			if(e.target.innerHTML === ""){
-				e.target.style.background = "rgba(64, 158, 255, 0.4)";
+		$(".mytd").click(function(e){
+			loc = e.currentTarget.dataset.loc;
+			if(loc[0] == 1){
+				$("#resultjc").get(0).value = '1,2节';
+			}else if(loc[0] == 3){
+				$("#resultjc").get(0).value = '6,7节';
+			}else{
+				$("#resultjc").get(0).value = '';
 			}
-		},function(e){
-			e.target.style.background = "white";
-			
-		})
-		$("td").click(function(e){
-			if(e.target.innerHTML === ""){
-				loc = e.target.parentElement.rowIndex + ',' + e.target.cellIndex;
-				if(loc[0] == 1){
-					$("#resultjc").get(0).value = '1,2节';
-				}else if(loc[0] == 3){
-					$("#resultjc").get(0).value = '6,7节';
-				}else{
-					$("#resultjc").get(0).value = '';
-				}
-				e.target.style.background = "rgba(64, 158, 255, 1)";
-				$("#resultjf").get(0).value = $("select")[0].value;
-				setTimeout(function(){
-					$(".zstitle")[0].style.display = "none";
-					$(".jifang")[0].style.display = "none";			
-				},500)
-			}
+			e.target.style.background = "rgba(64, 158, 255, 1)";
+			$("#resultjf").get(0).value = $("select")[0].value;
+			setTimeout(function(){
+				$(".zstitle")[0].style.display = "none";
+				$(".jifang")[0].style.display = "none";			
+			},500)
 		})
 	})
+	funclear()
 	settabledata(jsonlist)
 }
 function settabledata(jsonlist){
-	var td = document.getElementsByTagName('td');
+	var td = document.getElementsByClassName('mytd');
 	var td2 = []
 	for(var i = 0; i < 5; i++) {
 		var t = []
@@ -461,13 +592,26 @@ function settabledata(jsonlist){
 				break;
 			}
 		}
-		var innerhtml = jsonlist[i].courseName + "<br>" + jsonlist[i].teacher + "<br>" + jsonlist[i].student + "<br>" + min + '-' + max + ext + '(' + jsonlist[i].sectionName + ')';
 		var loc = jsonlist[i].location.split(',');
-		td2[loc[0] - 1][loc[1] - 1].innerHTML = innerhtml;
+		var innerhtml = '';
+		if(loc[1].indexOf('-') != -1){
+			innerhtml = '<div class="content half" data-loc="'+ loc[0]+','+loc[1] +'"><div class="font">' +jsonlist[i].courseName+ '</div>'+
+			jsonlist[i].teacher +'<br />'+
+			'<div class="font">'+jsonlist[i].student+'</div>'
+			+ min + '-' + max + ext + '(' + jsonlist[i].sectionName + ')'+"</div>"
+			loc[1]=loc[1].substr(0,loc[1].indexOf('-'))
+				//"<div style='font-size:8px;'>"+ + "<br>" +  + "<br><div style='width:100%;overflow-x:hidden;height: 27px;'>" +  + "</div>" + min + '-' + max + ext + '(' + jsonlist[i].sectionName + ')'+"</div>";
+		}else{
+			innerhtml = '<div class="content all" data-loc="'+ loc[0]+','+loc[1] +'"><div class="font">' +jsonlist[i].courseName+ '</div>'+
+			jsonlist[i].teacher +'<br />'+
+			'<div class="font">'+jsonlist[i].student+'</div>'
+			+ min + '-' + max + ext + '(' + jsonlist[i].sectionName + ')'+"</div>"
+		}
+		td2[loc[0] - 1][loc[1] - 1].innerHTML += innerhtml;
 	}
 }
 function funclear(){
-	var td = $('td');
+	var td = $('.mytd');
 	for(var i=0;i<td.length;i++){
 		td[i].innerHTML = "";
 	}

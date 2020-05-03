@@ -7,5 +7,6 @@ public interface CourseService {
 	public void addCourse(BeanCourse courses);
 	public List<BeanCourse> loadCourseList(String room);
 	public void deleteAllCourses(String room);
+	public void deleteCourse(BeanCourse course);
 	public void updataCourse(BeanCourse newcourse,BeanCourse oldcourse);
 }

@@ -79,7 +79,7 @@ public class CoursedetailController {
 	
 	@RequestMapping("/deleteAllCourses")
     @ResponseBody
-    public String changeRoom(@RequestBody String room,HttpServletRequest request, HttpServletResponse response)
+    public String deleteAllCourses(@RequestBody String room,HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 		ApplicationContext applicationContext=new ClassPathXmlApplicationContext("application.xml");
 		courseService=(CourseService) applicationContext.getBean("courseService");
@@ -88,5 +88,15 @@ public class CoursedetailController {
 		}
 		courseService.deleteAllCourses(room);
 		return "success";
+	}
+	
+	@RequestMapping("/deleteCourse")
+    @ResponseBody
+    public void deleteCourse(@RequestBody BeanCourse course,HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+		ApplicationContext applicationContext=new ClassPathXmlApplicationContext("application.xml");
+		courseService=(CourseService) applicationContext.getBean("courseService");
+		courseService.deleteCourse(course);
+		
 	}
 }
